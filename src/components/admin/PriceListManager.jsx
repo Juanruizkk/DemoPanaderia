@@ -47,7 +47,7 @@ export const PriceListManager = () => {
 
         <div className="flex items-center gap-2">
           {priceLists.map((list) => (
-            <Badge key={list.id} variant="amber" size="md">
+            <Badge key={list.id} variant="neutral" size="md">
               {list.name}
             </Badge>
           ))}
@@ -111,7 +111,7 @@ export const PriceListManager = () => {
                   </td>
 
                   <td className="px-3 py-3">
-                    <Badge variant={product.category === PRODUCT_CATEGORIES.FRESCOS ? 'amber' : 'sky'} size="sm">
+                    <Badge variant="neutral" size="sm">
                       {product.category === PRODUCT_CATEGORIES.FRESCOS ? 'Fresco' : 'Detalle'}
                     </Badge>
                   </td>
@@ -136,11 +136,11 @@ export const PriceListManager = () => {
                                 if (e.key === 'Enter') handleSaveEdit(product.id, list.id);
                                 if (e.key === 'Escape') setEditingCell(null);
                               }}
-                              className="w-24 px-2 py-1 text-right text-xs rounded-lg glass-input text-amber-300 font-bold font-mono"
+                              className="w-24 px-2 py-1 text-right text-xs rounded-lg glass-input text-white font-bold font-mono"
                             />
                             <button
                               onClick={() => handleSaveEdit(product.id, list.id)}
-                              className="p-1 rounded bg-emerald-600 text-white hover:bg-emerald-500"
+                              className="p-1 rounded bg-slate-700 text-white hover:bg-slate-600"
                             >
                               <Check className="w-3.5 h-3.5" />
                             </button>
@@ -148,7 +148,7 @@ export const PriceListManager = () => {
                         ) : (
                           <button
                             onClick={() => handleStartEdit(product.id, list.id, price)}
-                            className="group inline-flex items-center gap-1.5 font-bold hover:text-amber-400 px-2 py-1 rounded-lg hover:bg-slate-800 transition-colors"
+                            className="group inline-flex items-center gap-1.5 font-bold hover:text-white px-2 py-1 rounded-lg hover:bg-slate-800 transition-colors"
                             title="Haz clic para modificar precio"
                           >
                             <span className="text-slate-100">{formatCurrency(price)}</span>

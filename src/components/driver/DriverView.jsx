@@ -11,13 +11,14 @@ import {
   Package,
   Fuel,
   CheckSquare,
-  Truck,
-  DollarSign
+  RotateCcw,
+  PlayCircle
 } from 'lucide-react';
 import { formatCurrency } from '../../utils/formatters';
 
 export const DriverView = () => {
-  const { activeDriver, activeCashSettlement } = useBakery();
+  const { activeDriver, activeDriverId, activeCashSettlement, resetDriverData, resetAllDataToInitial } = useBakery();
+  const [confirmReset, setConfirmReset] = useState(null); // null | 'driver' | 'demo'
   const [activeDriverTab, setActiveDriverTab] = useState('route'); // 'route', 'bulk', 'stock', 'expenses', 'closure'
 
   const driverTabs = [
@@ -28,18 +29,57 @@ export const DriverView = () => {
     { id: 'closure', label: 'Cierre de Jornada', icon: CheckSquare },
   ];
 
+  const handleConfirmAction = () => {
+    if (confirmReset === 'driver') resetDriverData(activeDriverId);
+    else if (confirmReset === 'demo') resetAllDataToInitial();
+    setConfirmReset(null);
+  };
+
   return (
     <div className="space-y-5">
+      {/* Confirmation Dialog */}
+      {confirmReset && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm p-4">
+          <div className="bg-slate-900 border border-slate-700 rounded-2xl p-6 max-w-sm w-full space-y-4 shadow-2xl">
+            <div className="text-center space-y-2">
+              <div className="text-3xl">{confirmReset === 'driver' ? '🗑️' : '🎬'}</div>
+              <h3 className="text-base font-bold text-white">
+                {confirmReset === 'driver' ? 'Limpiar jornada del repartidor' : 'Cargar datos de demo'}
+              </h3>
+              <p className="text-xs text-slate-400">
+                {confirmReset === 'driver'
+                  ? `Se eliminarán todos los pedidos, gastos y movimientos de camioneta de ${activeDriver.name}. Esta acción no se puede deshacer.`
+                  : 'Se restaurarán todos los datos iniciales de demo (todos los repartidores). Se perderán los cambios actuales.'}
+              </p>
+            </div>
+            <div className="flex gap-3">
+              <button
+                onClick={() => setConfirmReset(null)}
+                className="flex-1 py-2.5 rounded-xl text-xs font-bold bg-slate-800 text-slate-300 hover:bg-slate-700 transition-colors"
+              >
+                Cancelar
+              </button>
+              <button
+                onClick={handleConfirmAction}
+                className="flex-1 py-2.5 rounded-xl text-xs font-bold bg-rose-600 hover:bg-rose-500 text-white transition-colors"
+              >
+                Confirmar
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Driver Header Card */}
-      <div className="glass-panel rounded-2xl p-4 sm:p-5 border border-blue-500/20 bg-gradient-to-r from-blue-950/20 via-slate-900/60 to-slate-900/20 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+      <div className="glass-panel rounded-2xl p-4 sm:p-5 border border-slate-800 bg-slate-900/60 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div className="flex items-center gap-3.5">
-          <div className="w-12 h-12 rounded-2xl bg-blue-600 text-white flex items-center justify-center shadow-lg shadow-blue-500/20 text-xl font-bold">
+          <div className="w-12 h-12 rounded-2xl bg-slate-800 border border-slate-700/80 text-white flex items-center justify-center text-xl shadow-sm">
             🚚
           </div>
           <div>
             <div className="flex items-center gap-2">
               <h2 className="text-xl font-bold text-white font-heading">{activeDriver.name}</h2>
-              <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-blue-500/20 text-blue-300 border border-blue-500/30">
+              <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-slate-800 text-slate-300 border border-slate-700">
                 {activeDriver.vehicle}
               </span>
             </div>
@@ -49,14 +89,34 @@ export const DriverView = () => {
           </div>
         </div>
 
-        {/* Quick Cash In Hand Pill */}
-        <div className="bg-slate-900/90 border border-slate-800 rounded-xl px-4 py-2 text-right">
-          <span className="text-[10px] uppercase font-bold text-slate-500 block">
-            Efectivo Cobrado en Calle
-          </span>
-          <span className="text-lg font-extrabold text-emerald-400 font-mono">
-            {formatCurrency(activeCashSettlement.totalCashCollected)}
-          </span>
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
+          {/* Demo buttons */}
+          <button
+            onClick={() => setConfirmReset('driver')}
+            className="flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold border border-slate-700 bg-slate-900/80 text-slate-400 hover:text-slate-200 transition-all"
+            title="Limpiar jornada del repartidor"
+          >
+            <RotateCcw className="w-3.5 h-3.5" />
+            <span>Resetear Vista</span>
+          </button>
+          <button
+            onClick={() => setConfirmReset('demo')}
+            className="flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold border border-slate-700 bg-slate-800/80 text-slate-300 hover:text-white transition-all"
+            title="Cargar datos de demo completos"
+          >
+            <PlayCircle className="w-3.5 h-3.5" />
+            <span>Simular Demo</span>
+          </button>
+
+          {/* Quick Cash In Hand Pill */}
+          <div className="bg-slate-900/90 border border-slate-800 rounded-xl px-4 py-2 text-right">
+            <span className="text-[10px] uppercase font-bold text-slate-500 block">
+              Efectivo Cobrado en Calle
+            </span>
+            <span className="text-lg font-extrabold text-emerald-400 font-mono">
+              {formatCurrency(activeCashSettlement.totalCashCollected)}
+            </span>
+          </div>
         </div>
       </div>
 
@@ -69,10 +129,10 @@ export const DriverView = () => {
             <button
               key={tab.id}
               onClick={() => setActiveDriverTab(tab.id)}
-              className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-bold transition-all whitespace-nowrap ${
+              className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-semibold transition-all whitespace-nowrap ${
                 isActive
-                  ? 'bg-blue-600 text-white shadow-lg shadow-blue-600/20'
-                  : 'text-slate-400 hover:text-white hover:bg-slate-900 border border-transparent hover:border-slate-800'
+                  ? 'bg-slate-100 text-slate-950 font-bold shadow-sm'
+                  : 'text-slate-400 hover:text-slate-200 hover:bg-slate-900 border border-transparent hover:border-slate-800'
               }`}
             >
               <Icon className="w-4 h-4" />

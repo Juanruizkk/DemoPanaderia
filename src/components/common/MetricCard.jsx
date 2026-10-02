@@ -12,19 +12,19 @@ export const MetricCard = ({
   onClick,
 }) => {
   const glowMap = {
-    default: 'hover:border-slate-600',
-    amber: 'hover:border-amber-500/50 glow-amber border-amber-500/20 bg-gradient-to-br from-amber-950/20 to-slate-900/40',
-    emerald: 'hover:border-emerald-500/50 glow-emerald border-emerald-500/20 bg-gradient-to-br from-emerald-950/20 to-slate-900/40',
-    rose: 'hover:border-rose-500/50 glow-rose border-rose-500/20 bg-gradient-to-br from-rose-950/20 to-slate-900/40',
-    sky: 'hover:border-sky-500/50 border-sky-500/20 bg-gradient-to-br from-sky-950/20 to-slate-900/40',
+    default: 'border-slate-800/80 hover:border-slate-700 bg-slate-900/60',
+    amber: 'border-slate-800/80 hover:border-slate-700 bg-slate-900/60',
+    emerald: 'border-slate-800/80 hover:border-emerald-500/30 bg-slate-900/60',
+    rose: 'border-rose-500/20 hover:border-rose-500/40 bg-rose-950/10',
+    sky: 'border-slate-800/80 hover:border-slate-700 bg-slate-900/60',
   };
 
   const iconBgMap = {
-    default: 'bg-slate-800 text-slate-300',
-    amber: 'bg-amber-500/20 text-amber-400 border border-amber-500/30',
-    emerald: 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30',
-    rose: 'bg-rose-500/20 text-rose-400 border border-rose-500/30',
-    sky: 'bg-sky-500/20 text-sky-400 border border-sky-500/30',
+    default: 'bg-slate-800/80 text-slate-300 border border-slate-700/60',
+    amber: 'bg-slate-800/80 text-slate-300 border border-slate-700/60',
+    emerald: 'bg-emerald-500/10 text-emerald-300 border border-emerald-500/20',
+    rose: 'bg-rose-500/10 text-rose-300 border border-rose-500/20',
+    sky: 'bg-slate-800/80 text-slate-300 border border-slate-700/60',
   };
 
   return (

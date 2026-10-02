@@ -43,7 +43,7 @@ export const DailyClosure = () => {
     <div className="max-w-2xl mx-auto space-y-6">
       {/* Top Banner */}
       <div className="glass-panel rounded-2xl p-6 border border-slate-800 text-center space-y-2">
-        <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-amber-500 to-amber-700 mx-auto flex items-center justify-center text-2xl shadow-lg shadow-amber-500/20">
+        <div className="w-14 h-14 rounded-2xl bg-slate-800 border border-slate-700/80 mx-auto flex items-center justify-center text-2xl shadow-sm">
           🏁
         </div>
         <h3 className="text-xl font-bold text-white font-heading">
@@ -67,34 +67,34 @@ export const DailyClosure = () => {
             <span className="font-bold text-white text-sm">{formatCurrency(settlement.totalBilled)}</span>
           </div>
 
-          <div className="flex justify-between items-center p-3 rounded-xl bg-emerald-950/20 border border-emerald-500/20 text-emerald-300">
+          <div className="flex justify-between items-center p-3 rounded-xl bg-slate-900/60 border border-slate-800 text-slate-200">
             <span className="font-sans">Efectivo Cobrado en Mano:</span>
-            <span className="font-bold text-sm">+{formatCurrency(settlement.totalCashCollected)}</span>
+            <span className="font-bold text-sm text-emerald-400">+{formatCurrency(settlement.totalCashCollected)}</span>
           </div>
 
-          <div className="flex justify-between items-center p-3 rounded-xl bg-blue-950/20 border border-blue-500/20 text-blue-300">
+          <div className="flex justify-between items-center p-3 rounded-xl bg-slate-900/60 border border-slate-800 text-slate-200">
             <span className="font-sans">Cobranzas por Transferencia:</span>
-            <span className="font-bold text-sm">{formatCurrency(settlement.totalTransferCollected)}</span>
+            <span className="font-bold text-sm text-slate-300">{formatCurrency(settlement.totalTransferCollected)}</span>
           </div>
 
-          <div className="flex justify-between items-center p-3 rounded-xl bg-amber-950/20 border border-amber-500/20 text-amber-300">
+          <div className="flex justify-between items-center p-3 rounded-xl bg-slate-900/60 border border-slate-800 text-slate-200">
             <span className="font-sans">Gastos de Combustible / Viáticos:</span>
-            <span className="font-bold text-sm">-{formatCurrency(settlement.cashExpenses)}</span>
+            <span className="font-bold text-sm text-slate-400">-{formatCurrency(settlement.cashExpenses)}</span>
           </div>
 
-          <div className="h-px bg-slate-700 my-2" />
+          <div className="h-px bg-slate-800 my-2" />
 
           {/* Grand Total to hand in */}
-          <div className="p-5 rounded-2xl bg-gradient-to-r from-slate-900 to-amber-950/40 border-2 border-amber-500/50 glow-amber flex items-center justify-between">
+          <div className="p-5 rounded-2xl bg-slate-900 border border-slate-700 flex items-center justify-between">
             <div>
-              <span className="text-xs font-bold uppercase tracking-wider text-amber-400 block font-sans">
+              <span className="text-xs font-bold uppercase tracking-wider text-slate-300 block font-sans">
                 Efectivo Neto a Rendir en Fábrica:
               </span>
               <span className="text-[11px] text-slate-400 font-sans font-normal">
                 Efectivo cobrado menos gastos de nafta
               </span>
             </div>
-            <span className="text-3xl font-black text-amber-300 font-mono">
+            <span className="text-3xl font-extrabold text-white font-mono">
               {formatCurrency(settlement.netCashDueToBakery)}
             </span>
           </div>
@@ -122,13 +122,13 @@ export const DailyClosure = () => {
         {/* Action Button */}
         <div className="pt-2">
           {submitted ? (
-            <div className="p-4 rounded-xl bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 text-center font-bold text-sm animate-pulse">
-              ✅ ¡Cierre de ruta notificado a Administración! Entrega el efectivo en mostrador.
+            <div className="p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 text-center font-bold text-sm">
+              ✓ Cierre de ruta notificado a Administración. Entrega el efectivo en mostrador.
             </div>
           ) : (
             <button
               onClick={handleDriverClosure}
-              className="w-full py-4 px-6 rounded-2xl font-bold text-sm text-slate-950 bg-gradient-to-r from-amber-400 via-amber-500 to-amber-400 hover:opacity-95 shadow-xl shadow-amber-500/25 transition-all flex items-center justify-center gap-2"
+              className="w-full py-4 px-6 rounded-2xl font-bold text-sm text-slate-950 bg-slate-100 hover:bg-white shadow-md transition-all flex items-center justify-center gap-2"
             >
               <Send className="w-4 h-4" />
               <span>Finalizar Ruta & Enviar Rendición</span>

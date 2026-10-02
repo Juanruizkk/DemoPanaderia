@@ -8,7 +8,7 @@
   
   body {
     font-family: var(--font-sans);
-    background-color: #090d16;
+    background-color: #0b0f19;
     color: #f1f5f9;
   }
 
@@ -17,35 +17,35 @@
   }
 }
 
-/* Custom Scrollbars */
+/* Custom Scrollbars - Sober & Minimal */
 ::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  width: 5px;
+  height: 5px;
 }
 
 ::-webkit-scrollbar-track {
-  background: rgba(15, 23, 42, 0.6);
+  background: rgba(15, 23, 42, 0.4);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(217, 119, 6, 0.4);
+  background: rgba(148, 163, 184, 0.2);
   border-radius: 9999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(217, 119, 6, 0.8);
+  background: rgba(148, 163, 184, 0.35);
 }
 
-/* Glassmorphism helpers */
+/* Glassmorphism helpers - Refined & Crisp */
 .glass-panel {
-  background: rgba(15, 23, 42, 0.75);
+  background: rgba(15, 23, 42, 0.65);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.07);
 }
 
 .glass-card {
-  background: rgba(30, 41, 59, 0.6);
+  background: rgba(17, 24, 39, 0.5);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border: 1px solid rgba(255, 255, 255, 0.06);
@@ -56,43 +56,43 @@
 }
 
 .glass-card-hover:hover {
-  background: rgba(30, 41, 59, 0.85);
-  border-color: rgba(245, 158, 11, 0.3);
-  transform: translateY(-2px);
+  background: rgba(30, 41, 59, 0.55);
+  border-color: rgba(255, 255, 255, 0.14);
+  transform: translateY(-1px);
 }
 
 .glass-input {
-  background: rgba(15, 23, 42, 0.8);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(15, 23, 42, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.09);
   color: #f8fafc;
-  transition: all 0.2s ease;
+  transition: all 0.15s ease;
 }
 
 .glass-input:focus {
   outline: none;
-  border-color: #f59e0b;
-  box-shadow: 0 0 0 2px rgba(245, 158, 11, 0.2);
+  border-color: rgba(148, 163, 184, 0.45);
+  box-shadow: 0 0 0 2px rgba(148, 163, 184, 0.08);
 }
 
-/* Glow effects */
+/* Subtle border accents */
 .glow-amber {
-  box-shadow: 0 0 25px -5px rgba(245, 158, 11, 0.25);
+  box-shadow: 0 0 15px -3px rgba(245, 158, 11, 0.1);
 }
 
 .glow-emerald {
-  box-shadow: 0 0 25px -5px rgba(16, 185, 129, 0.25);
+  box-shadow: 0 0 15px -3px rgba(16, 185, 129, 0.1);
 }
 
 .glow-rose {
-  box-shadow: 0 0 25px -5px rgba(244, 63, 94, 0.25);
+  box-shadow: 0 0 15px -3px rgba(244, 63, 94, 0.1);
 }
 
 /* Pulse animation for live alerts */
 @keyframes pulse-subtle {
   0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.85; transform: scale(0.98); }
+  50% { opacity: 0.88; transform: scale(0.99); }
 }
 
 .animate-pulse-subtle {
-  animation: pulse-subtle 2.5s infinite ease-in-out;
+  animation: pulse-subtle 3s infinite ease-in-out;
 }

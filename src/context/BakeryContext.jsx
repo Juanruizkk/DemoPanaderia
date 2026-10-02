@@ -353,6 +353,21 @@ export const BakeryProvider = ({ children }) => {
     logAction('RESET_DEMO', 'dinero', 'Datos de prueba reiniciados', 'Valores restaurados según imágenes originales', 'info');
   };
 
+  // 8. LIMPIAR DATOS DEL REPARTIDOR ACTIVO (jornada en blanco)
+  const resetDriverData = (driverId) => {
+    const driver = data.drivers.find(d => d.id === driverId) || activeDriver;
+    setData(prev => ({
+      ...prev,
+      orders: prev.orders.filter(o => o.driverId !== driverId),
+      expenses: prev.expenses.filter(e => e.driverId !== driverId),
+      vanMovements: {
+        ...prev.vanMovements,
+        [driverId]: {}
+      }
+    }));
+    logAction('RESET_REPARTIDOR', 'stock', `Jornada de ${driver.name} reiniciada`, 'Pedidos, gastos y movimientos de camioneta eliminados', 'warning');
+  };
+
   // CÁLCULOS REACTIVOS CONSOLIDADOS
   // Auditoría del repartidor activo
   const activeVanAudit = useMemo(() => {
@@ -443,6 +458,7 @@ export const BakeryProvider = ({ children }) => {
     closeDailyShift,
     addAuditLog: logAction,
     resetAllDataToInitial,
+    resetDriverData,
 
     // Métricas calculadas
     activeVanAudit,

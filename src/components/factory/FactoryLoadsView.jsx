@@ -36,12 +36,11 @@ export const FactoryLoadsView = () => {
     updateVanMovement(selectedDriverId, productId, field, value);
   };
 
-  return (
-    <div className="space-y-6">
+  return (    <div className="space-y-6">
       {/* Top Banner */}
-      <div className="glass-panel rounded-2xl p-5 border border-purple-500/20 bg-gradient-to-r from-purple-950/20 via-slate-900/60 to-slate-900/20 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4">
+      <div className="glass-panel rounded-2xl p-5 border border-slate-800 bg-slate-900/60 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4">
         <div className="flex items-center gap-3.5">
-          <div className="w-12 h-12 rounded-2xl bg-purple-600 text-white flex items-center justify-center shadow-lg shadow-purple-500/20 text-xl font-bold">
+          <div className="w-10 h-10 rounded-xl bg-slate-800 border border-slate-700 text-slate-200 flex items-center justify-center text-lg font-bold">
             🏭
           </div>
           <div>
@@ -49,7 +48,7 @@ export const FactoryLoadsView = () => {
               <h2 className="text-xl font-bold text-white font-heading">
                 Planilla de Carga, Recarga y Descarga de Fábrica
               </h2>
-              <Badge variant="indigo" size="sm">calle.jpg</Badge>
+              <Badge variant="neutral" size="sm">calle.jpg</Badge>
             </div>
             <p className="text-xs text-slate-400">
               Control de salidas y retornos de mercadería física por camioneta para el cuadre automático diario.
@@ -58,14 +57,14 @@ export const FactoryLoadsView = () => {
         </div>
 
         {/* Driver selector */}
-        <div className="flex items-center gap-2 bg-slate-900/90 p-1 rounded-xl border border-slate-800">
+        <div className="flex items-center gap-1.5 bg-slate-950 p-1 rounded-xl border border-slate-800">
           {drivers.map((d) => (
             <button
               key={d.id}
               onClick={() => setSelectedDriverId(d.id)}
-              className={`flex items-center gap-2 px-3.5 py-2 rounded-lg text-xs font-bold transition-all ${
+              className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-bold transition-all ${
                 selectedDriverId === d.id
-                  ? 'bg-purple-600 text-white shadow-md shadow-purple-600/20'
+                  ? 'bg-slate-100 text-slate-950 shadow-sm'
                   : 'text-slate-400 hover:text-white hover:bg-slate-800'
               }`}
             >
@@ -82,9 +81,9 @@ export const FactoryLoadsView = () => {
           <button
             key={day}
             onClick={() => setSelectedDay(day)}
-            className={`px-3.5 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap transition-all ${
+            className={`px-3.5 py-1.5 rounded-xl text-xs whitespace-nowrap transition-all ${
               selectedDay === day
-                ? 'bg-purple-500/20 text-purple-300 border border-purple-500/40 font-bold'
+                ? 'bg-slate-100 text-slate-950 font-bold shadow-sm'
                 : 'bg-slate-900 text-slate-400 hover:text-white hover:bg-slate-800 border border-slate-800'
             }`}
           >
@@ -111,7 +110,7 @@ export const FactoryLoadsView = () => {
           <select
             value={categoryFilter}
             onChange={(e) => setCategoryFilter(e.target.value)}
-            className="glass-input text-xs rounded-xl px-3 py-2"
+            className="glass-input text-xs rounded-xl px-3 py-2 text-slate-300"
           >
             <option value="all">Todas las Categorías</option>
             <option value={PRODUCT_CATEGORIES.DETALLE}>{PRODUCT_CATEGORIES.DETALLE}</option>
@@ -126,30 +125,30 @@ export const FactoryLoadsView = () => {
           <table className="w-full text-left text-xs">
             <thead className="bg-slate-900/90 text-slate-300 uppercase font-semibold text-[11px] border-b border-slate-800 tracking-wider">
               <tr>
-                <th className="px-4 py-3.5">Producto (Bandejas / Unidades)</th>
-                <th className="px-3 py-3.5">Categoría</th>
-                <th className="px-3 py-3.5 text-center text-blue-300">
+                <th className="px-4 py-3.5 text-slate-300">Producto</th>
+                <th className="px-3 py-3.5 text-slate-400">Categoría</th>
+                <th className="px-3 py-3.5 text-center text-slate-300">
                   <div className="flex items-center justify-center gap-1">
-                    <ArrowUpRight className="w-3.5 h-3.5 text-blue-400" />
+                    <ArrowUpRight className="w-3.5 h-3.5 text-slate-400" />
                     <span>Carga (Mañana)</span>
                   </div>
                 </th>
-                <th className="px-3 py-3.5 text-center text-cyan-300">
+                <th className="px-3 py-3.5 text-center text-slate-300">
                   <div className="flex items-center justify-center gap-1">
-                    <RefreshCw className="w-3.5 h-3.5 text-cyan-400" />
+                    <RefreshCw className="w-3.5 h-3.5 text-slate-400" />
                     <span>Recarga (Fábrica)</span>
                   </div>
                 </th>
-                <th className="px-3 py-3.5 text-center text-purple-300">
+                <th className="px-3 py-3.5 text-center text-slate-300">
                   <div className="flex items-center justify-center gap-1">
-                    <ArrowDownLeft className="w-3.5 h-3.5 text-purple-400" />
+                    <ArrowDownLeft className="w-3.5 h-3.5 text-slate-400" />
                     <span>Descarga (Tarde)</span>
                   </div>
                 </th>
-                <th className="px-3 py-3.5 text-center text-amber-300">
+                <th className="px-3 py-3.5 text-center text-slate-300">
                   <span>Cambios s/cargo</span>
                 </th>
-                <th className="px-4 py-3.5 text-right font-bold text-white bg-slate-800/40">
+                <th className="px-4 py-3.5 text-right font-bold text-slate-200 bg-slate-850/60">
                   Vendido Físico
                 </th>
               </tr>
@@ -165,14 +164,14 @@ export const FactoryLoadsView = () => {
                       <div className="flex items-center gap-2.5">
                         <span className="text-xl">{product.icon}</span>
                         <div>
-                          <div className="font-bold text-white text-sm">{product.name}</div>
+                          <div className="font-bold text-white text-xs">{product.name}</div>
                           <div className="text-[10px] text-slate-400">Unidad: {product.unit}</div>
                         </div>
                       </div>
                     </td>
 
                     <td className="px-3 py-3">
-                      <Badge variant={product.category === PRODUCT_CATEGORIES.FRESCOS ? 'amber' : 'sky'} size="sm">
+                      <Badge variant="neutral" size="sm">
                         {product.category === PRODUCT_CATEGORIES.FRESCOS ? 'Fresco' : 'Detalle'}
                       </Badge>
                     </td>
@@ -185,7 +184,7 @@ export const FactoryLoadsView = () => {
                         value={mov.carga || ''}
                         placeholder="0"
                         onChange={(e) => handleInputChange(product.id, 'carga', e.target.value)}
-                        className="w-16 text-center py-1.5 px-2 rounded-xl bg-slate-950/80 border border-slate-800 focus:border-blue-500 font-mono font-bold text-blue-300 text-xs"
+                        className="w-16 text-center py-1.5 px-2 rounded-xl bg-slate-950/80 border border-slate-800 focus:border-slate-600 font-mono font-bold text-slate-200 text-xs"
                       />
                     </td>
 
@@ -197,7 +196,7 @@ export const FactoryLoadsView = () => {
                         value={mov.recarga || ''}
                         placeholder="0"
                         onChange={(e) => handleInputChange(product.id, 'recarga', e.target.value)}
-                        className="w-16 text-center py-1.5 px-2 rounded-xl bg-slate-950/80 border border-slate-800 focus:border-cyan-500 font-mono font-bold text-cyan-300 text-xs"
+                        className="w-16 text-center py-1.5 px-2 rounded-xl bg-slate-950/80 border border-slate-800 focus:border-slate-600 font-mono font-bold text-slate-200 text-xs"
                       />
                     </td>
 
@@ -209,7 +208,7 @@ export const FactoryLoadsView = () => {
                         value={mov.descarga || ''}
                         placeholder="0"
                         onChange={(e) => handleInputChange(product.id, 'descarga', e.target.value)}
-                        className="w-16 text-center py-1.5 px-2 rounded-xl bg-slate-950/80 border border-slate-800 focus:border-purple-500 font-mono font-bold text-purple-300 text-xs"
+                        className="w-16 text-center py-1.5 px-2 rounded-xl bg-slate-950/80 border border-slate-800 focus:border-slate-600 font-mono font-bold text-slate-200 text-xs"
                       />
                     </td>
 
@@ -221,12 +220,12 @@ export const FactoryLoadsView = () => {
                         value={mov.cambios || ''}
                         placeholder="0"
                         onChange={(e) => handleInputChange(product.id, 'cambios', e.target.value)}
-                        className="w-16 text-center py-1.5 px-2 rounded-xl bg-slate-950/80 border border-slate-800 focus:border-amber-500 font-mono font-bold text-amber-300 text-xs"
+                        className="w-16 text-center py-1.5 px-2 rounded-xl bg-slate-950/80 border border-slate-800 focus:border-slate-600 font-mono font-bold text-slate-200 text-xs"
                       />
                     </td>
 
                     {/* Vendido Físico Calculado */}
-                    <td className="px-4 py-3 text-right font-mono font-bold text-sm text-white bg-slate-800/40">
+                    <td className="px-4 py-3 text-right font-mono font-bold text-sm text-white bg-slate-850/60">
                       {vendidoFisico}
                     </td>
                   </tr>

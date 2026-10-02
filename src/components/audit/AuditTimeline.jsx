@@ -23,10 +23,10 @@ export const AuditTimeline = () => {
 
   const categories = [
     { id: 'all', label: 'Todos los Eventos' },
-    { id: 'stock', label: '📦 Stock & Cargas' },
-    { id: 'dinero', label: '💰 Dinero & Precios' },
-    { id: 'entrega', label: '🚚 Entregas a Clientes' },
-    { id: 'gasto', label: '⛽ Gastos & Combustible' },
+    { id: 'stock', label: 'Stock & Cargas' },
+    { id: 'dinero', label: 'Dinero & Precios' },
+    { id: 'entrega', label: 'Entregas a Clientes' },
+    { id: 'gasto', label: 'Gastos & Combustible' },
   ];
 
   const filteredLogs = auditLogs.filter((log) => {
@@ -41,10 +41,10 @@ export const AuditTimeline = () => {
 
   const getLogIcon = (category, severity) => {
     if (severity === 'danger') return <AlertTriangle className="w-4 h-4 text-rose-400" />;
-    if (category === 'stock') return <Package className="w-4 h-4 text-blue-400" />;
-    if (category === 'dinero') return <DollarSign className="w-4 h-4 text-emerald-400" />;
-    if (category === 'entrega') return <Truck className="w-4 h-4 text-amber-400" />;
-    if (category === 'gasto') return <Fuel className="w-4 h-4 text-purple-400" />;
+    if (category === 'stock') return <Package className="w-4 h-4 text-slate-300" />;
+    if (category === 'dinero') return <DollarSign className="w-4 h-4 text-slate-300" />;
+    if (category === 'entrega') return <Truck className="w-4 h-4 text-slate-300" />;
+    if (category === 'gasto') return <Fuel className="w-4 h-4 text-slate-300" />;
     return <History className="w-4 h-4 text-slate-400" />;
   };
 
@@ -57,7 +57,7 @@ export const AuditTimeline = () => {
       case 'danger':
         return 'rose';
       default:
-        return 'sky';
+        return 'neutral';
     }
   };
 
@@ -81,10 +81,10 @@ export const AuditTimeline = () => {
             <button
               key={cat.id}
               onClick={() => setCategoryFilter(cat.id)}
-              className={`px-3 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap transition-all ${
+              className={`px-3 py-1.5 rounded-xl text-xs whitespace-nowrap transition-all ${
                 categoryFilter === cat.id
-                  ? 'bg-amber-500 text-slate-950 font-bold shadow-md shadow-amber-500/20'
-                  : 'bg-slate-800/80 text-slate-400 hover:text-white hover:bg-slate-800'
+                  ? 'bg-slate-100 text-slate-950 font-bold shadow-sm'
+                  : 'bg-slate-950 text-slate-400 hover:text-white hover:bg-slate-800 border border-slate-800'
               }`}
             >
               {cat.label}
@@ -108,8 +108,8 @@ export const AuditTimeline = () => {
               return (
                 <div key={log.id} className="relative group">
                   {/* Timeline Dot */}
-                  <div className="absolute -left-[27px] top-1 w-5 h-5 rounded-full bg-slate-900 border-2 border-amber-500/60 flex items-center justify-center text-[10px] shadow-md shadow-amber-500/20 group-hover:border-amber-400 transition-colors">
-                    <div className="w-2 h-2 rounded-full bg-amber-400" />
+                  <div className="absolute -left-[27px] top-1 w-5 h-5 rounded-full bg-slate-900 border-2 border-slate-600 flex items-center justify-center text-[10px] shadow-sm group-hover:border-slate-400 transition-colors">
+                    <div className="w-2 h-2 rounded-full bg-slate-300" />
                   </div>
 
                   {/* Card Content */}

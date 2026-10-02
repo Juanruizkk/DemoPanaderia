@@ -120,17 +120,16 @@ export const BulkSpreadsheet = () => {
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 bg-slate-900/80 p-4 rounded-2xl border border-slate-800">
         <div>
           <h3 className="text-base font-bold text-white flex items-center gap-2 font-heading">
-            <FileSpreadsheet className="w-5 h-5 text-amber-400" />
-            <span>Planilla Digital Masiva (Estilo Excel de Reparto)</span>
+            <FileSpreadsheet className="w-5 h-5 text-slate-300" />
+            <span>Planilla Digital Masiva (Estilo Planilla de Reparto)</span>
           </h3>
           <p className="text-xs text-slate-400">
-            Carga ultra rápida en cuadrícula. Los cambios se guardan automáticamente y actualizan el stock de la camioneta.
+            Carga rápida en cuadrícula. Los cambios se guardan automáticamente y actualizan el stock de la camioneta.
           </p>
         </div>
 
         <div className="flex items-center gap-2">
-          <Badge variant="emerald" size="md">
-            <Sparkles className="w-3.5 h-3.5" />
+          <Badge variant="neutral" size="md">
             <span>Auto-guardado activo</span>
           </Badge>
         </div>
@@ -149,19 +148,19 @@ export const BulkSpreadsheet = () => {
                 <th rowSpan={2} className="px-4 py-3 border-r border-slate-800 bg-slate-900 text-white min-w-[140px] sticky left-0 z-30 shadow-md">
                   Cliente
                 </th>
-                <th colSpan={6} className="px-3 py-2 text-center border-r border-slate-800 bg-amber-950/30 text-amber-300">
+                <th colSpan={6} className="px-3 py-2 text-center border-r border-slate-800 bg-slate-800/80 text-slate-200">
                   🍞 PAN
                 </th>
-                <th colSpan={3} className="px-3 py-2 text-center border-r border-slate-800 bg-blue-950/30 text-blue-300">
+                <th colSpan={3} className="px-3 py-2 text-center border-r border-slate-800 bg-slate-800/80 text-slate-200">
                   🫓 TORTILLA
                 </th>
-                <th colSpan={2} className="px-3 py-2 text-center border-r border-slate-800 bg-purple-950/30 text-purple-300">
+                <th colSpan={2} className="px-3 py-2 text-center border-r border-slate-800 bg-slate-800/80 text-slate-200">
                   🥐 FACTURA
                 </th>
-                <th rowSpan={2} className="px-3 py-3 text-right border-r border-slate-800 bg-slate-900 text-amber-400">
+                <th rowSpan={2} className="px-3 py-3 text-right border-r border-slate-800 bg-slate-900 text-slate-300">
                   Total $
                 </th>
-                <th rowSpan={2} className="px-3 py-3 text-right border-r border-slate-800 bg-slate-900 text-emerald-400">
+                <th rowSpan={2} className="px-3 py-3 text-right border-r border-slate-800 bg-slate-900 text-slate-300">
                   Cobrado $
                 </th>
                 <th rowSpan={2} className="px-3 py-3 text-right bg-slate-900 text-rose-400">
@@ -170,7 +169,7 @@ export const BulkSpreadsheet = () => {
               </tr>
               <tr className="bg-slate-950 text-slate-400 border-b border-slate-800 text-[10px]">
                 {/* Pan subheaders */}
-                <th className="px-2 py-1.5 text-center bg-amber-900/20 text-white font-bold">Total</th>
+                <th className="px-2 py-1.5 text-center bg-slate-900 text-white font-bold">Total</th>
                 <th className="px-2 py-1.5 text-center">Fra</th>
                 <th className="px-2 py-1.5 text-center">x2</th>
                 <th className="px-2 py-1.5 text-center">x3</th>
@@ -218,7 +217,7 @@ export const BulkSpreadsheet = () => {
                     {/* Saldo Anterior */}
                     <td className="px-3 py-2 border-r border-slate-800 font-mono text-slate-400">
                       {initialDebt > 0 ? (
-                        <span className="text-amber-400 font-bold">{formatCurrency(initialDebt)}</span>
+                        <span className="text-slate-300 font-semibold">{formatCurrency(initialDebt)}</span>
                       ) : (
                         '-'
                       )}
@@ -230,7 +229,7 @@ export const BulkSpreadsheet = () => {
                     </td>
 
                     {/* Pan Total */}
-                    <td className="px-2 py-1 text-center bg-amber-950/15 font-bold text-white border-r border-slate-800/40">
+                    <td className="px-2 py-1 text-center bg-slate-900/60 font-bold text-white border-r border-slate-800/40">
                       {totalPanRow || '-'}
                     </td>
 
@@ -242,7 +241,7 @@ export const BulkSpreadsheet = () => {
                         value={qFra || ''}
                         placeholder="-"
                         onChange={(e) => handleCellChange(client.id, 'pan-frances', e.target.value)}
-                        className="w-11 text-center py-1 rounded bg-slate-950/60 border border-slate-800 focus:border-amber-500 font-mono font-bold text-xs"
+                        className="w-11 text-center py-1 rounded bg-slate-950/60 border border-slate-800 focus:border-slate-500 font-mono font-bold text-xs text-slate-100"
                       />
                     </td>
 
@@ -254,7 +253,7 @@ export const BulkSpreadsheet = () => {
                         value={qX2 || ''}
                         placeholder="-"
                         onChange={(e) => handleCellChange(client.id, 'pan-x2', e.target.value)}
-                        className="w-11 text-center py-1 rounded bg-slate-950/60 border border-slate-800 focus:border-amber-500 font-mono font-bold text-xs"
+                        className="w-11 text-center py-1 rounded bg-slate-950/60 border border-slate-800 focus:border-slate-500 font-mono font-bold text-xs text-slate-100"
                       />
                     </td>
 
@@ -266,7 +265,7 @@ export const BulkSpreadsheet = () => {
                         value={qX3 || ''}
                         placeholder="-"
                         onChange={(e) => handleCellChange(client.id, 'pan-x3', e.target.value)}
-                        className="w-11 text-center py-1 rounded bg-slate-950/60 border border-slate-800 focus:border-amber-500 font-mono font-bold text-xs"
+                        className="w-11 text-center py-1 rounded bg-slate-950/60 border border-slate-800 focus:border-slate-500 font-mono font-bold text-xs text-slate-100"
                       />
                     </td>
 
@@ -278,7 +277,7 @@ export const BulkSpreadsheet = () => {
                         value={qMig || ''}
                         placeholder="-"
                         onChange={(e) => handleCellChange(client.id, 'pan-miga', e.target.value)}
-                        className="w-11 text-center py-1 rounded bg-slate-950/60 border border-slate-800 focus:border-amber-500 font-mono font-bold text-xs"
+                        className="w-11 text-center py-1 rounded bg-slate-950/60 border border-slate-800 focus:border-slate-500 font-mono font-bold text-xs text-slate-100"
                       />
                     </td>
 
@@ -290,7 +289,7 @@ export const BulkSpreadsheet = () => {
                         value={qNeg || ''}
                         placeholder="-"
                         onChange={(e) => handleCellChange(client.id, 'pan-negro', e.target.value)}
-                        className="w-11 text-center py-1 rounded bg-slate-950/60 border border-slate-800 focus:border-amber-500 font-mono font-bold text-xs"
+                        className="w-11 text-center py-1 rounded bg-slate-950/60 border border-slate-800 focus:border-slate-500 font-mono font-bold text-xs text-slate-100"
                       />
                     </td>
 
@@ -302,7 +301,7 @@ export const BulkSpreadsheet = () => {
                         value={qTorHor || ''}
                         placeholder="-"
                         onChange={(e) => handleCellChange(client.id, 'tortillas-horno', e.target.value)}
-                        className="w-12 text-center py-1 rounded bg-slate-950/60 border border-slate-800 focus:border-blue-500 font-mono font-bold text-xs"
+                        className="w-12 text-center py-1 rounded bg-slate-950/60 border border-slate-800 focus:border-slate-500 font-mono font-bold text-xs text-slate-100"
                       />
                     </td>
 
@@ -314,7 +313,7 @@ export const BulkSpreadsheet = () => {
                         value={qTorCru || ''}
                         placeholder="-"
                         onChange={(e) => handleCellChange(client.id, 'tortillas-crudas', e.target.value)}
-                        className="w-12 text-center py-1 rounded bg-slate-950/60 border border-slate-800 focus:border-blue-500 font-mono font-bold text-xs"
+                        className="w-12 text-center py-1 rounded bg-slate-950/60 border border-slate-800 focus:border-slate-500 font-mono font-bold text-xs text-slate-100"
                       />
                     </td>
 
@@ -327,7 +326,7 @@ export const BulkSpreadsheet = () => {
                         onChange={(e) =>
                           handleCellChange(client.id, 'tortillas-horno', qTorHor, e.target.value)
                         }
-                        className="w-full px-2 py-1 rounded bg-slate-950/60 border border-slate-800 focus:border-blue-500 text-[11px] text-slate-300"
+                        className="w-full px-2 py-1 rounded bg-slate-950/60 border border-slate-800 focus:border-slate-500 text-[11px] text-slate-300"
                       />
                     </td>
 
@@ -339,7 +338,7 @@ export const BulkSpreadsheet = () => {
                         value={qFact || ''}
                         placeholder="-"
                         onChange={(e) => handleCellChange(client.id, 'facturas', e.target.value)}
-                        className="w-11 text-center py-1 rounded bg-slate-950/60 border border-slate-800 focus:border-purple-500 font-mono font-bold text-xs"
+                        className="w-11 text-center py-1 rounded bg-slate-950/60 border border-slate-800 focus:border-slate-500 font-mono font-bold text-xs text-slate-100"
                       />
                     </td>
 
@@ -352,7 +351,7 @@ export const BulkSpreadsheet = () => {
                         onChange={(e) =>
                           handleCellChange(client.id, 'facturas', qFact, e.target.value)
                         }
-                        className="w-full px-2 py-1 rounded bg-slate-950/60 border border-slate-800 focus:border-purple-500 text-[11px] text-slate-300"
+                        className="w-full px-2 py-1 rounded bg-slate-950/60 border border-slate-800 focus:border-slate-500 text-[11px] text-slate-300"
                       />
                     </td>
 
@@ -386,26 +385,26 @@ export const BulkSpreadsheet = () => {
               })}
             </tbody>
 
-            {/* Totales del Pie de Tabla (Idéntico a pedidosrepartidores.jpg) */}
-            <tfoot className="bg-slate-900 border-t-2 border-amber-500/50 font-mono text-xs font-bold text-white sticky bottom-0 z-20 shadow-lg">
+            {/* Totales del Pie de Tabla */}
+            <tfoot className="bg-slate-900 border-t-2 border-slate-700 font-mono text-xs font-bold text-white sticky bottom-0 z-20 shadow-lg">
               <tr>
-                <td colSpan={2} className="px-4 py-3 text-amber-400 font-sans text-xs uppercase font-extrabold sticky left-0 bg-slate-900">
+                <td colSpan={2} className="px-4 py-3 text-slate-300 font-sans text-xs uppercase font-extrabold sticky left-0 bg-slate-900">
                   TOTALES DE RUTA HOY:
                 </td>
-                <td className="px-2 py-3 text-center bg-amber-950/40 text-amber-300 text-sm">{sumPanTotal}</td>
-                <td className="px-2 py-3 text-center text-amber-300">{sumPanFra}</td>
-                <td className="px-2 py-3 text-center text-amber-300">{sumPanX2}</td>
-                <td className="px-2 py-3 text-center text-amber-300">{sumPanX3}</td>
-                <td className="px-2 py-3 text-center text-amber-300">{sumPanMig}</td>
-                <td className="px-2 py-3 text-center border-r border-slate-800 text-amber-300">{sumPanNeg}</td>
+                <td className="px-2 py-3 text-center bg-slate-800/80 text-white text-sm">{sumPanTotal}</td>
+                <td className="px-2 py-3 text-center text-slate-200">{sumPanFra}</td>
+                <td className="px-2 py-3 text-center text-slate-200">{sumPanX2}</td>
+                <td className="px-2 py-3 text-center text-slate-200">{sumPanX3}</td>
+                <td className="px-2 py-3 text-center text-slate-200">{sumPanMig}</td>
+                <td className="px-2 py-3 text-center border-r border-slate-800 text-slate-200">{sumPanNeg}</td>
 
-                <td className="px-2 py-3 text-center text-blue-300">{sumTorHor}</td>
-                <td className="px-2 py-3 text-center text-blue-300">{sumTorCru}</td>
-                <td className="px-2 py-3 text-center border-r border-slate-800 text-blue-300 font-sans font-normal text-[10px]">
+                <td className="px-2 py-3 text-center text-slate-200">{sumTorHor}</td>
+                <td className="px-2 py-3 text-center text-slate-200">{sumTorCru}</td>
+                <td className="px-2 py-3 text-center border-r border-slate-800 text-slate-400 font-sans font-normal text-[10px]">
                   {sumTorTotal} tot.
                 </td>
 
-                <td className="px-2 py-3 text-center text-purple-300">{sumFactTotal}</td>
+                <td className="px-2 py-3 text-center text-slate-200">{sumFactTotal}</td>
                 <td className="px-2 py-3 border-r border-slate-800"></td>
 
                 <td className="px-3 py-3 text-right border-r border-slate-800 text-white font-extrabold text-sm">

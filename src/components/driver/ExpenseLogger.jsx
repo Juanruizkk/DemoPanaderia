@@ -46,7 +46,7 @@ export const ExpenseLogger = () => {
           <span className="text-[10px] text-slate-500 uppercase font-bold block">
             Total Gastos Declarados
           </span>
-          <span className="text-2xl font-extrabold text-amber-400 font-mono">
+          <span className="text-2xl font-extrabold text-white font-mono">
             {formatCurrency(totalDriverExpenses)}
           </span>
         </div>
@@ -56,7 +56,7 @@ export const ExpenseLogger = () => {
         {/* Form */}
         <div className="glass-panel rounded-2xl p-5 border border-slate-800">
           <h4 className="text-sm font-bold text-white mb-4 font-heading flex items-center gap-2">
-            <Plus className="w-4 h-4 text-amber-400" />
+            <Plus className="w-4 h-4 text-slate-300" />
             <span>Cargar Nuevo Comprobante</span>
           </h4>
 
@@ -91,7 +91,7 @@ export const ExpenseLogger = () => {
                   placeholder="Ej: 15000"
                   value={amount}
                   onChange={(e) => setAmount(e.target.value)}
-                  className="w-full pl-8 pr-4 py-2.5 rounded-xl glass-input text-sm font-bold font-mono text-amber-300"
+                  className="w-full pl-8 pr-4 py-2.5 rounded-xl glass-input text-sm font-bold font-mono text-white"
                 />
               </div>
             </div>
@@ -116,7 +116,7 @@ export const ExpenseLogger = () => {
                 id="cashPaid"
                 checked={paidWithCash}
                 onChange={(e) => setPaidWithCash(e.target.checked)}
-                className="rounded border-slate-700 text-amber-500 focus:ring-amber-500 bg-slate-800"
+                className="rounded border-slate-700 text-slate-300 focus:ring-slate-600 bg-slate-800"
               />
               <label htmlFor="cashPaid" className="text-xs text-slate-300 cursor-pointer">
                 Pagado con el efectivo de las cobranzas
@@ -125,7 +125,7 @@ export const ExpenseLogger = () => {
 
             <button
               type="submit"
-              className="w-full py-2.5 px-4 rounded-xl font-bold text-xs bg-amber-500 hover:bg-amber-400 text-slate-950 shadow-md shadow-amber-500/20 transition-all flex items-center justify-center gap-1.5"
+              className="w-full py-2.5 px-4 rounded-xl font-bold text-xs bg-slate-100 hover:bg-white text-slate-950 shadow-sm transition-all flex items-center justify-center gap-1.5"
             >
               <Plus className="w-4 h-4" />
               <span>Registrar Gasto</span>
@@ -151,7 +151,7 @@ export const ExpenseLogger = () => {
                   className="glass-card rounded-xl p-3.5 border border-slate-800 flex items-center justify-between gap-3 text-xs"
                 >
                   <div className="flex items-center gap-3">
-                    <div className="p-2.5 rounded-xl bg-amber-500/10 text-amber-400 border border-amber-500/20">
+                    <div className="p-2.5 rounded-xl bg-slate-800 text-slate-300 border border-slate-700">
                       <Fuel className="w-4 h-4" />
                     </div>
                     <div>
@@ -168,7 +168,7 @@ export const ExpenseLogger = () => {
                   </div>
 
                   <div className="flex items-center gap-3">
-                    <span className="font-bold text-base text-amber-300 font-mono">
+                    <span className="font-bold text-base text-slate-200 font-mono">
                       {formatCurrency(exp.amount)}
                     </span>
                     <button

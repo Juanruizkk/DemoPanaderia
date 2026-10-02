@@ -27,9 +27,9 @@ export const AuditStats = () => {
   return (
     <div className="space-y-6">
       {/* Top Health Banner */}
-      <div className="glass-panel rounded-2xl p-6 border border-slate-800 bg-gradient-to-r from-slate-900 via-amber-950/20 to-slate-900 flex flex-col md:flex-row items-center justify-between gap-6">
+      <div className="glass-panel rounded-2xl p-6 border border-slate-800 bg-slate-900/60 flex flex-col md:flex-row items-center justify-between gap-6">
         <div className="flex items-center gap-4">
-          <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-amber-500 to-amber-700 flex items-center justify-center text-3xl shadow-lg shadow-amber-500/20 border border-amber-400/30 shrink-0">
+          <div className="w-12 h-12 rounded-xl bg-slate-800 border border-slate-700 flex items-center justify-center text-2xl shrink-0">
             🛡️
           </div>
           <div>
@@ -37,7 +37,7 @@ export const AuditStats = () => {
               <h3 className="text-xl font-bold text-white font-heading">
                 Índice de Salud de Auditoría & Control
               </h3>
-              <span className="px-2 py-0.5 rounded-full text-xs font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+              <span className="px-2.5 py-0.5 rounded-full text-xs font-bold bg-slate-800 text-slate-200 border border-slate-700">
                 {healthScore}% Confiabilidad
               </span>
             </div>
@@ -49,7 +49,7 @@ export const AuditStats = () => {
 
         <div className="text-center md:text-right shrink-0">
           <span className="text-xs font-semibold text-slate-400 uppercase">Jornadas 100% Cuadradas</span>
-          <div className="text-3xl font-extrabold text-emerald-400 font-heading">
+          <div className="text-3xl font-bold text-white font-heading">
             {cleanClosures} de {totalClosures}
           </div>
         </div>
@@ -60,7 +60,7 @@ export const AuditStats = () => {
         <div className="glass-card rounded-2xl p-5 border border-slate-800">
           <div className="flex items-center justify-between text-slate-400 mb-2">
             <span className="text-xs font-semibold uppercase">Total Eventos Registrados</span>
-            <ShieldCheck className="w-4 h-4 text-amber-400" />
+            <ShieldCheck className="w-4 h-4 text-slate-400" />
           </div>
           <div className="text-3xl font-bold text-white font-heading font-mono">
             {auditLogs.length} acciones
@@ -86,7 +86,7 @@ export const AuditStats = () => {
         <div className="glass-card rounded-2xl p-5 border border-slate-800">
           <div className="flex items-center justify-between text-slate-400 mb-2">
             <span className="text-xs font-semibold uppercase">Desvío de Mercadería Actual</span>
-            <AlertOctagon className="w-4 h-4 text-amber-400" />
+            <AlertOctagon className="w-4 h-4 text-slate-400" />
           </div>
           <div className="text-3xl font-bold text-white font-heading font-mono">
             {companySummary.totalStockMissingUnits} un.

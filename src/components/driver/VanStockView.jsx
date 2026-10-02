@@ -1,9 +1,8 @@
 import React from 'react';
 import { useBakery } from '../../context/BakeryContext';
 import { calculateVanAuditForDriver } from '../../utils/calculations';
-import { formatCurrency, formatNumber } from '../../utils/formatters';
 import { Badge } from '../common/Badge';
-import { Truck, Package, CheckCircle2, AlertTriangle, BatteryCharging } from 'lucide-react';
+import { Truck } from 'lucide-react';
 
 export const VanStockView = () => {
   const { activeDriverId, activeDriver, products, vanMovements, orders } = useBakery();
@@ -16,7 +15,7 @@ export const VanStockView = () => {
       {/* Top Van Header */}
       <div className="glass-panel rounded-2xl p-5 border border-slate-800 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div className="flex items-center gap-3.5">
-          <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500 to-blue-700 flex items-center justify-center text-white shadow-lg shadow-blue-500/20">
+          <div className="w-12 h-12 rounded-xl bg-slate-800 border border-slate-700/80 flex items-center justify-center text-white shadow-sm">
             <Truck className="w-6 h-6" />
           </div>
           <div>
@@ -24,7 +23,7 @@ export const VanStockView = () => {
               <h3 className="text-lg font-bold text-white font-heading">
                 Stock Móvil en Camioneta ({activeDriver.vehicle.split('-')[0]})
               </h3>
-              <Badge variant="sky" size="sm">En Vivo</Badge>
+              <Badge variant="neutral" size="sm">En Vivo</Badge>
             </div>
             <p className="text-xs text-slate-400">
               Inventario disponible restante en la camioneta a medida que vas entregando pedidos.
@@ -36,7 +35,7 @@ export const VanStockView = () => {
           <span className="text-[10px] text-slate-500 uppercase font-bold block">
             Variedades en Reparto
           </span>
-          <span className="text-xl font-extrabold text-amber-400 font-mono">
+          <span className="text-xl font-extrabold text-white font-mono">
             {activeProducts.length} productos
           </span>
         </div>
@@ -74,7 +73,7 @@ export const VanStockView = () => {
                   </div>
 
                   <div className="text-right font-mono">
-                    <span className="text-2xl font-black text-amber-400">
+                    <span className="text-2xl font-black text-white">
                       {remaining}
                     </span>
                     <span className="text-[10px] text-slate-500 block">restantes</span>
@@ -90,7 +89,7 @@ export const VanStockView = () => {
                   <div className="w-full h-2 bg-slate-900 rounded-full overflow-hidden border border-slate-800">
                     <div
                       className={`h-full transition-all duration-300 rounded-full ${
-                        percentRemaining > 30 ? 'bg-amber-500' : percentRemaining > 0 ? 'bg-rose-500' : 'bg-slate-700'
+                        percentRemaining > 20 ? 'bg-slate-300' : percentRemaining > 0 ? 'bg-rose-400' : 'bg-slate-700'
                       }`}
                       style={{ width: `${percentRemaining}%` }}
                     />
@@ -100,9 +99,9 @@ export const VanStockView = () => {
                 {/* Breakdown details */}
                 <div className="pt-2 border-t border-slate-800/80 flex items-center justify-between text-[11px] text-slate-400 font-mono">
                   <span>Carga: {row.carga}</span>
-                  {row.recarga > 0 && <span className="text-cyan-400">Recarga: +{row.recarga}</span>}
-                  {row.cambios > 0 && <span className="text-amber-400">Cambio: -{row.cambios}</span>}
-                  {row.descarga > 0 && <span className="text-purple-400">Descarga: {row.descarga}</span>}
+                  {row.recarga > 0 && <span className="text-slate-300">Recarga: +{row.recarga}</span>}
+                  {row.cambios > 0 && <span className="text-slate-300">Cambio: -{row.cambios}</span>}
+                  {row.descarga > 0 && <span className="text-slate-300">Descarga: {row.descarga}</span>}
                 </div>
               </div>
             );

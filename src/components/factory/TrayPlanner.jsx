@@ -10,10 +10,10 @@ export const TrayPlanner = () => {
   return (
     <div className="space-y-6">
       {/* Header Info */}
-      <div className="glass-panel rounded-2xl p-5 border border-purple-500/20 bg-gradient-to-r from-purple-950/20 to-slate-900/40 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+      <div className="glass-panel rounded-2xl p-5 border border-slate-800 bg-slate-900/60 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div>
           <h3 className="text-lg font-bold text-white font-heading flex items-center gap-2">
-            <Layers className="w-5 h-5 text-purple-400" />
+            <Layers className="w-5 h-5 text-slate-300" />
             <span>Planificador de Relleno de Bandejas & Producción</span>
           </h3>
           <p className="text-xs text-slate-400 max-w-2xl mt-1">
@@ -21,7 +21,7 @@ export const TrayPlanner = () => {
           </p>
         </div>
 
-        <Badge variant="indigo" size="lg">
+        <Badge variant="neutral" size="lg">
           <Sparkles className="w-3.5 h-3.5" />
           <span>Optimización de Sobrantes</span>
         </Badge>
@@ -39,7 +39,7 @@ export const TrayPlanner = () => {
                   <h4 className="font-bold text-white text-base font-heading">{driver.name}</h4>
                   <span className="text-xs text-slate-400">{driver.vehicle}</span>
                 </div>
-                <Badge variant="amber" size="sm">Para Mañana</Badge>
+                <Badge variant="neutral" size="sm">Para Mañana</Badge>
               </div>
 
               <div className="space-y-2.5 max-h-96 overflow-y-auto pr-1 text-xs">
@@ -67,10 +67,10 @@ export const TrayPlanner = () => {
                       </div>
 
                       <div className="text-right">
-                        <span className="text-[10px] text-purple-400 uppercase font-bold block">
+                        <span className="text-[10px] text-slate-400 uppercase font-bold block">
                           Completar en Bandeja
                         </span>
-                        <span className="text-base font-black text-white font-mono">
+                        <span className="text-base font-bold text-slate-100 font-mono">
                           +{neededToBake} {product.unit}
                         </span>
                       </div>

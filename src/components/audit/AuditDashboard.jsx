@@ -36,8 +36,8 @@ export const AuditDashboard = () => {
               onClick={() => setActiveSubTab(tab.id)}
               className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-bold transition-all whitespace-nowrap ${
                 isActive
-                  ? 'bg-emerald-600 text-white shadow-lg shadow-emerald-600/20'
-                  : 'text-slate-400 hover:text-white hover:bg-slate-900 border border-transparent hover:border-slate-800'
+                  ? 'bg-slate-100 text-slate-950 shadow-sm'
+                  : 'text-slate-400 hover:text-white hover:bg-slate-800/80 border border-transparent hover:border-slate-750'
               }`}
             >
               <Icon className="w-4 h-4" />

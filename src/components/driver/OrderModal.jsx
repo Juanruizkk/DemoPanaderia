@@ -26,6 +26,7 @@ export const OrderModal = ({ isOpen, onClose, client, existingOrder = null }) =>
   const [paymentMethod, setPaymentMethod] = useState('efectivo'); // 'efectivo', 'transferencia'
   const [notes, setNotes] = useState('');
   const [activeCategoryTab, setActiveCategoryTab] = useState(PRODUCT_CATEGORIES.FRESCOS);
+  const [pendingWhatsApp, setPendingWhatsApp] = useState(null); // null | true | false
 
   const clientPriceListId = client?.priceListId || 'reparto';
   const clientPriceList = priceLists.find((pl) => pl.id === clientPriceListId);
@@ -103,6 +104,13 @@ export const OrderModal = ({ isOpen, onClose, client, existingOrder = null }) =>
       alert('Por favor ingrese al menos un producto o un pago.');
       return;
     }
+    // Mostrar confirmación
+    setPendingWhatsApp(sendWhatsApp);
+  };
+
+  const handleConfirmSave = () => {
+    const sendWhatsApp = pendingWhatsApp;
+    setPendingWhatsApp(null);
 
     const orderData = {
       driverId: activeDriverId,
@@ -135,11 +143,58 @@ export const OrderModal = ({ isOpen, onClose, client, existingOrder = null }) =>
   return (
     <Modal
       isOpen={isOpen}
-      onClose={onClose}
+      onClose={pendingWhatsApp !== null ? undefined : onClose}
       title={`Entrega: ${client?.name || 'Cliente'}`}
       subtitle={`Lista: ${clientPriceList?.name || 'Reparto'} • Saldo Previo: ${formatCurrency(initialDebt)}`}
       maxWidth="max-w-3xl"
     >
+      {/* Confirmation Overlay */}
+      {pendingWhatsApp !== null && (
+        <div className="absolute inset-0 z-10 flex items-center justify-center bg-slate-950/90 backdrop-blur-sm rounded-2xl p-6">
+          <div className="bg-slate-900 border border-slate-700 rounded-2xl p-6 max-w-xs w-full space-y-4 shadow-2xl">
+            <div className="text-center space-y-1">
+              <div className="text-2xl text-slate-300">✓</div>
+              <h3 className="text-base font-bold text-white">Confirmar entrega</h3>
+              <p className="text-xs text-slate-400">{client?.name}</p>
+            </div>
+            <div className="space-y-2 text-xs">
+              <div className="flex justify-between text-slate-300">
+                <span>Total pedido</span>
+                <span className="font-bold text-white font-mono">{formatCurrency(totalAmount)}</span>
+              </div>
+              <div className="flex justify-between text-slate-300">
+                <span>Cobrado</span>
+                <span className="font-bold text-emerald-400 font-mono">{formatCurrency(enteredPayment)}</span>
+              </div>
+              {remainingDebt > 0 && (
+                <div className="flex justify-between text-slate-300">
+                  <span>Queda a deber</span>
+                  <span className="font-bold text-rose-400 font-mono">{formatCurrency(remainingDebt)}</span>
+                </div>
+              )}
+              <div className="flex justify-between text-slate-300 pt-1 border-t border-slate-800">
+                <span>Forma de pago</span>
+                <span className="font-bold text-white capitalize">{paymentMethod === 'efectivo' ? 'Efectivo' : 'Transferencia'}</span>
+              </div>
+            </div>
+            <div className="flex gap-3 pt-1">
+              <button
+                onClick={() => setPendingWhatsApp(null)}
+                className="flex-1 py-2.5 rounded-xl text-xs font-bold bg-slate-800 text-slate-300 hover:bg-slate-700 transition-colors border border-slate-700"
+              >
+                Volver
+              </button>
+              <button
+                onClick={handleConfirmSave}
+                className="flex-1 py-2.5 rounded-xl text-xs font-bold bg-slate-100 hover:bg-white text-slate-950 transition-colors shadow-sm"
+              >
+                {pendingWhatsApp ? 'Guardar & WA' : 'Confirmar'}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
       <div className="space-y-6">
         {/* Category Tabs */}
         <div className="flex items-center gap-2 border-b border-slate-800 pb-2">
@@ -148,7 +203,7 @@ export const OrderModal = ({ isOpen, onClose, client, existingOrder = null }) =>
             onClick={() => setActiveCategoryTab(PRODUCT_CATEGORIES.FRESCOS)}
             className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all ${
               activeCategoryTab === PRODUCT_CATEGORIES.FRESCOS
-                ? 'bg-amber-500 text-slate-950 shadow-md shadow-amber-500/20'
+                ? 'bg-slate-100 text-slate-950 shadow-sm'
                 : 'text-slate-400 hover:text-white hover:bg-slate-800'
             }`}
           >
@@ -161,7 +216,7 @@ export const OrderModal = ({ isOpen, onClose, client, existingOrder = null }) =>
             onClick={() => setActiveCategoryTab(PRODUCT_CATEGORIES.DETALLE)}
             className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all ${
               activeCategoryTab === PRODUCT_CATEGORIES.DETALLE
-                ? 'bg-amber-500 text-slate-950 shadow-md shadow-amber-500/20'
+                ? 'bg-slate-100 text-slate-950 shadow-sm'
                 : 'text-slate-400 hover:text-white hover:bg-slate-800'
             }`}
           >
@@ -183,7 +238,7 @@ export const OrderModal = ({ isOpen, onClose, client, existingOrder = null }) =>
                 key={prod.id}
                 className={`p-3 rounded-xl border transition-all ${
                   qty > 0
-                    ? 'bg-slate-800/90 border-amber-500/50 shadow-sm'
+                    ? 'bg-slate-850 border-slate-600 shadow-sm'
                     : 'bg-slate-900/50 border-slate-800/80 hover:border-slate-700'
                 }`}
               >
@@ -192,7 +247,7 @@ export const OrderModal = ({ isOpen, onClose, client, existingOrder = null }) =>
                     <span className="text-xl">{prod.icon}</span>
                     <div>
                       <div className="font-bold text-white text-xs">{prod.name}</div>
-                      <div className="text-[10px] text-amber-400 font-mono">
+                      <div className="text-[10px] text-slate-400 font-mono">
                         {formatCurrency(unitPrice)} / {prod.unit}
                       </div>
                     </div>
@@ -203,7 +258,7 @@ export const OrderModal = ({ isOpen, onClose, client, existingOrder = null }) =>
                     <button
                       type="button"
                       onClick={() => handleQuantityChange(prod.id, -1)}
-                      className="w-7 h-7 rounded bg-slate-800 hover:bg-slate-700 text-white flex items-center justify-center font-bold text-sm"
+                      className="w-7 h-7 rounded bg-slate-800 hover:bg-slate-700 text-white flex items-center justify-center font-bold text-sm transition-colors"
                     >
                       <Minus className="w-3.5 h-3.5" />
                     </button>
@@ -213,12 +268,13 @@ export const OrderModal = ({ isOpen, onClose, client, existingOrder = null }) =>
                       value={qty || ''}
                       placeholder="0"
                       onChange={(e) => handleDirectQuantityInput(prod.id, e.target.value)}
+                      onWheel={(e) => e.target.blur()}
                       className="w-10 text-center text-xs font-bold text-white bg-transparent outline-none font-mono"
                     />
                     <button
                       type="button"
                       onClick={() => handleQuantityChange(prod.id, 1)}
-                      className="w-7 h-7 rounded bg-amber-500 hover:bg-amber-400 text-slate-950 flex items-center justify-center font-bold text-sm"
+                      className="w-7 h-7 rounded bg-slate-100 hover:bg-white text-slate-950 flex items-center justify-center font-bold text-sm transition-colors shadow-sm"
                     >
                       <Plus className="w-3.5 h-3.5" />
                     </button>
@@ -260,7 +316,7 @@ export const OrderModal = ({ isOpen, onClose, client, existingOrder = null }) =>
               <span className="text-[10px] text-slate-400 uppercase font-semibold block">
                 Saldo Previo
               </span>
-              <span className="text-xl font-bold text-amber-400 font-heading">
+              <span className="text-xl font-bold text-slate-300 font-heading">
                 {formatCurrency(initialDebt)}
               </span>
             </div>
@@ -288,6 +344,7 @@ export const OrderModal = ({ isOpen, onClose, client, existingOrder = null }) =>
                   placeholder={totalAmount.toString()}
                   value={paidAmount}
                   onChange={(e) => setPaidAmount(e.target.value)}
+                  onWheel={(e) => e.target.blur()}
                   className="w-full pl-8 pr-4 py-2.5 rounded-xl glass-input text-base font-bold font-mono text-emerald-400"
                 />
               </div>
@@ -295,14 +352,14 @@ export const OrderModal = ({ isOpen, onClose, client, existingOrder = null }) =>
                 <button
                   type="button"
                   onClick={() => setPaidAmount(totalAmount.toString())}
-                  className="text-[10px] px-2 py-1 rounded bg-slate-800 text-slate-300 hover:text-white"
+                  className="text-[10px] px-2.5 py-1 rounded-lg bg-slate-800 text-slate-300 hover:text-white border border-slate-700 transition-colors"
                 >
                   Paga Total Hoy ({formatCurrency(totalAmount)})
                 </button>
                 <button
                   type="button"
                   onClick={() => setPaidAmount('0')}
-                  className="text-[10px] px-2 py-1 rounded bg-slate-800 text-rose-300 hover:text-rose-200"
+                  className="text-[10px] px-2.5 py-1 rounded-lg bg-slate-800 text-rose-300 hover:text-rose-200 border border-slate-700 transition-colors"
                 >
                   Fiado ($0)
                 </button>
@@ -319,7 +376,7 @@ export const OrderModal = ({ isOpen, onClose, client, existingOrder = null }) =>
                   onClick={() => setPaymentMethod('efectivo')}
                   className={`py-2 px-3 rounded-xl text-xs font-bold border transition-all ${
                     paymentMethod === 'efectivo'
-                      ? 'bg-emerald-600 text-white border-emerald-500 shadow-md shadow-emerald-500/20'
+                      ? 'bg-slate-100 text-slate-950 border-slate-200 font-bold shadow-sm'
                       : 'bg-slate-950 text-slate-400 border-slate-800 hover:bg-slate-800'
                   }`}
                 >
@@ -330,7 +387,7 @@ export const OrderModal = ({ isOpen, onClose, client, existingOrder = null }) =>
                   onClick={() => setPaymentMethod('transferencia')}
                   className={`py-2 px-3 rounded-xl text-xs font-bold border transition-all ${
                     paymentMethod === 'transferencia'
-                      ? 'bg-blue-600 text-white border-blue-500 shadow-md shadow-blue-500/20'
+                      ? 'bg-slate-100 text-slate-950 border-slate-200 font-bold shadow-sm'
                       : 'bg-slate-950 text-slate-400 border-slate-800 hover:bg-slate-800'
                   }`}
                 >
@@ -355,16 +412,16 @@ export const OrderModal = ({ isOpen, onClose, client, existingOrder = null }) =>
             <button
               type="button"
               onClick={() => handleSaveOrder(true)}
-              className="flex-1 sm:flex-initial px-4 py-3 rounded-xl text-xs font-bold bg-emerald-600 hover:bg-emerald-500 text-white flex items-center justify-center gap-1.5 shadow-lg shadow-emerald-600/20 transition-all"
+              className="flex-1 sm:flex-initial px-4 py-3 rounded-xl text-xs font-bold bg-slate-800 hover:bg-slate-700 text-emerald-400 border border-emerald-500/30 flex items-center justify-center gap-1.5 transition-all"
             >
               <MessageCircle className="w-4 h-4" />
-              <span>Guardar & Enviar WhatsApp</span>
+              <span>Guardar & WhatsApp</span>
             </button>
 
             <button
               type="button"
               onClick={() => handleSaveOrder(false)}
-              className="flex-1 sm:flex-initial px-5 py-3 rounded-xl text-xs font-bold bg-amber-500 hover:bg-amber-400 text-slate-950 flex items-center justify-center gap-1.5 shadow-lg shadow-amber-500/20 transition-all"
+              className="flex-1 sm:flex-initial px-5 py-3 rounded-xl text-xs font-bold bg-slate-100 hover:bg-white text-slate-950 flex items-center justify-center gap-1.5 shadow-sm transition-all"
             >
               <Check className="w-4 h-4" />
               <span>Guardar Entrega</span>

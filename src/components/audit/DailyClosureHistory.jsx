@@ -40,7 +40,7 @@ export const DailyClosureHistory = () => {
           {searchDate && (
             <button
               onClick={() => setSearchDate('')}
-              className="text-xs text-amber-400 hover:underline px-2"
+              className="text-xs text-slate-400 hover:text-white hover:underline px-2 transition-colors"
             >
               Limpiar fecha
             </button>
@@ -52,7 +52,7 @@ export const DailyClosureHistory = () => {
           <select
             value={selectedDriverFilter}
             onChange={(e) => setSelectedDriverFilter(e.target.value)}
-            className="glass-input text-xs rounded-xl px-3 py-2"
+            className="glass-input text-xs rounded-xl px-3 py-2 text-slate-300"
           >
             <option value="all">Todos los Repartidores</option>
             {drivers.map((d) => (
@@ -78,7 +78,7 @@ export const DailyClosureHistory = () => {
                 key={closure.id}
                 className={`glass-panel rounded-2xl p-5 border transition-all ${
                   isClean
-                    ? 'border-emerald-500/20 hover:border-emerald-500/40'
+                    ? 'border-slate-800 hover:border-slate-700 bg-slate-900/40'
                     : 'border-rose-500/30 hover:border-rose-500/50 bg-rose-950/10'
                 }`}
               >
@@ -103,7 +103,7 @@ export const DailyClosureHistory = () => {
                     <span className="text-[10px] uppercase font-bold text-slate-500">
                       Rendido a Fábrica
                     </span>
-                    <div className="text-lg font-extrabold text-amber-400 font-mono">
+                    <div className="text-lg font-bold text-slate-100 font-mono">
                       {formatCurrency(closure.cashHandedIn)}
                     </div>
                   </div>
@@ -111,17 +111,17 @@ export const DailyClosureHistory = () => {
 
                 {/* Metrics Breakdown */}
                 <div className="grid grid-cols-3 gap-2 py-3.5 text-center font-mono text-xs border-b border-slate-800/80">
-                  <div className="bg-slate-900/60 p-2 rounded-xl border border-slate-800">
+                  <div className="bg-slate-950/60 p-2 rounded-xl border border-slate-800">
                     <span className="text-[10px] text-slate-400 font-sans block">Total Venta</span>
                     <span className="font-bold text-white">{formatCurrency(closure.totalBilled)}</span>
                   </div>
-                  <div className="bg-slate-900/60 p-2 rounded-xl border border-slate-800">
+                  <div className="bg-slate-950/60 p-2 rounded-xl border border-slate-800">
                     <span className="text-[10px] text-slate-400 font-sans block">Cobrado Efec.</span>
                     <span className="font-bold text-emerald-400">{formatCurrency(closure.cashCollected)}</span>
                   </div>
-                  <div className="bg-slate-900/60 p-2 rounded-xl border border-slate-800">
+                  <div className="bg-slate-950/60 p-2 rounded-xl border border-slate-800">
                     <span className="text-[10px] text-slate-400 font-sans block">Gastos Nafta</span>
-                    <span className="font-bold text-amber-400">{formatCurrency(closure.expensesAmount)}</span>
+                    <span className="font-bold text-slate-300">{formatCurrency(closure.expensesAmount)}</span>
                   </div>
                 </div>
 

@@ -12,7 +12,6 @@ import {
   CheckCircle2,
   AlertCircle,
   Truck,
-  Sparkles,
   ArrowRight
 } from 'lucide-react';
 
@@ -35,8 +34,8 @@ export const CashReconciliation = () => {
     closeDailyShift(selectedDriverId, enteredCash, closureNotes);
     setClosureSuccess(true);
     confetti({
-      particleCount: 80,
-      spread: 70,
+      particleCount: 50,
+      spread: 60,
       origin: { y: 0.6 }
     });
     setTimeout(() => {
@@ -58,10 +57,10 @@ export const CashReconciliation = () => {
                 setSelectedDriverId(driver.id);
                 setCashHandedIn('');
               }}
-              className={`flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-bold transition-all ${
+              className={`flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-semibold transition-all ${
                 selectedDriverId === driver.id
-                  ? 'bg-amber-500 text-slate-950 shadow-md shadow-amber-500/20'
-                  : 'text-slate-400 hover:text-white hover:bg-slate-800'
+                  ? 'bg-slate-100 text-slate-950 font-bold shadow-sm'
+                  : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800'
               }`}
             >
               <Truck className="w-3.5 h-3.5" />
@@ -81,7 +80,7 @@ export const CashReconciliation = () => {
         <div className="glass-card rounded-2xl p-5 border border-slate-800">
           <div className="flex items-center justify-between text-slate-400 mb-2">
             <span className="text-xs font-semibold uppercase">Total Ventas Ruta</span>
-            <Receipt className="w-4 h-4 text-amber-400" />
+            <Receipt className="w-4 h-4 text-slate-300" />
           </div>
           <div className="text-2xl font-bold text-white font-heading">
             {formatCurrency(settlement.totalBilled)}
@@ -92,43 +91,43 @@ export const CashReconciliation = () => {
         </div>
 
         {/* Cobrado Efectivo */}
-        <div className="glass-card rounded-2xl p-5 border border-emerald-500/20 bg-emerald-950/10">
+        <div className="glass-card rounded-2xl p-5 border border-slate-800 bg-slate-900/60">
           <div className="flex items-center justify-between text-emerald-400 mb-2">
             <span className="text-xs font-semibold uppercase">Cobrado en Efectivo</span>
             <DollarSign className="w-4 h-4" />
           </div>
-          <div className="text-2xl font-bold text-emerald-300 font-heading">
+          <div className="text-2xl font-bold text-emerald-400 font-heading">
             {formatCurrency(settlement.totalCashCollected)}
           </div>
-          <div className="text-xs text-emerald-400/70 mt-1">
+          <div className="text-xs text-slate-500 mt-1">
             Plata física recaudada en mano
           </div>
         </div>
 
         {/* Cobrado Transferencia */}
-        <div className="glass-card rounded-2xl p-5 border border-blue-500/20 bg-blue-950/10">
-          <div className="flex items-center justify-between text-blue-400 mb-2">
+        <div className="glass-card rounded-2xl p-5 border border-slate-800 bg-slate-900/60">
+          <div className="flex items-center justify-between text-slate-300 mb-2">
             <span className="text-xs font-semibold uppercase">Cobrado Transferencias</span>
             <CreditCard className="w-4 h-4" />
           </div>
-          <div className="text-2xl font-bold text-blue-300 font-heading">
+          <div className="text-2xl font-bold text-slate-200 font-heading">
             {formatCurrency(settlement.totalTransferCollected)}
           </div>
-          <div className="text-xs text-blue-400/70 mt-1">
+          <div className="text-xs text-slate-500 mt-1">
             Acreditado directo en banco
           </div>
         </div>
 
         {/* Gastos y Combustible */}
-        <div className="glass-card rounded-2xl p-5 border border-amber-500/20 bg-amber-950/10">
-          <div className="flex items-center justify-between text-amber-400 mb-2">
+        <div className="glass-card rounded-2xl p-5 border border-slate-800 bg-slate-900/60">
+          <div className="flex items-center justify-between text-slate-300 mb-2">
             <span className="text-xs font-semibold uppercase">Gastos de Ruta</span>
             <Fuel className="w-4 h-4" />
           </div>
-          <div className="text-2xl font-bold text-amber-300 font-heading">
+          <div className="text-2xl font-bold text-slate-200 font-heading">
             {formatCurrency(settlement.totalExpenses)}
           </div>
-          <div className="text-xs text-amber-400/70 mt-1">
+          <div className="text-xs text-slate-500 mt-1">
             Combustible y viáticos autorizados
           </div>
         </div>
@@ -151,12 +150,12 @@ export const CashReconciliation = () => {
 
             <div className="flex items-center justify-between p-3 rounded-xl bg-slate-900/60 border border-slate-800">
               <span className="text-slate-300 font-sans">Menos Gastos Pagados en Efectivo (Nafta, etc.):</span>
-              <span className="text-amber-400 font-bold">-{formatCurrency(settlement.cashExpenses)}</span>
+              <span className="text-slate-400 font-bold">-{formatCurrency(settlement.cashExpenses)}</span>
             </div>
 
-            <div className="h-px bg-slate-700 my-2" />
+            <div className="h-px bg-slate-800 my-2" />
 
-            <div className="flex items-center justify-between p-4 rounded-xl bg-slate-900 border-2 border-amber-500/40 glow-amber">
+            <div className="flex items-center justify-between p-4 rounded-xl bg-slate-900 border border-slate-700">
               <div>
                 <span className="text-sm font-bold text-white block font-sans">
                   EFECTIVO TEÓRICO A ENTREGAR EN CAJA FÁBRICA:
@@ -165,7 +164,7 @@ export const CashReconciliation = () => {
                   Monto que el repartidor debe poner sobre el mostrador
                 </span>
               </div>
-              <span className="text-2xl font-extrabold text-amber-300 font-mono">
+              <span className="text-2xl font-extrabold text-white font-mono">
                 {formatCurrency(settlement.netCashDueToBakery)}
               </span>
             </div>
@@ -186,7 +185,7 @@ export const CashReconciliation = () => {
                     className="flex items-center justify-between p-3 rounded-xl bg-slate-900/80 border border-slate-800 text-xs"
                   >
                     <div className="flex items-center gap-3">
-                      <div className="p-2 rounded-lg bg-amber-500/10 text-amber-400">
+                      <div className="p-2 rounded-lg bg-slate-800 text-slate-300 border border-slate-700">
                         <Fuel className="w-4 h-4" />
                       </div>
                       <div>
@@ -194,7 +193,7 @@ export const CashReconciliation = () => {
                         <div className="text-slate-500 text-[10px]">{formatTime(exp.timestamp)} • {exp.category.toUpperCase()}</div>
                       </div>
                     </div>
-                    <span className="font-bold text-amber-400 font-mono text-sm">
+                    <span className="font-bold text-slate-200 font-mono text-sm">
                       {formatCurrency(exp.amount)}
                     </span>
                   </div>
@@ -234,10 +233,10 @@ export const CashReconciliation = () => {
             <div
               className={`p-3.5 rounded-xl border text-xs flex items-center justify-between ${
                 cashDiff === 0
-                  ? 'bg-emerald-950/30 border-emerald-500/30 text-emerald-300'
+                  ? 'bg-emerald-950/20 border-emerald-500/20 text-emerald-300'
                   : cashDiff < 0
-                  ? 'bg-rose-950/30 border-rose-500/40 text-rose-300'
-                  : 'bg-sky-950/30 border-sky-500/40 text-sky-300'
+                  ? 'bg-rose-950/20 border-rose-500/30 text-rose-300'
+                  : 'bg-slate-800/60 border-slate-700 text-slate-300'
               }`}
             >
               <div className="flex items-center gap-2">
@@ -275,13 +274,13 @@ export const CashReconciliation = () => {
 
           <div>
             {closureSuccess ? (
-              <div className="p-4 rounded-xl bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 text-center font-bold text-sm animate-bounce">
-                🎉 ¡Liquidación Diaria Aprobada y Guardada en Historial!
+              <div className="p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 text-center font-bold text-sm">
+                ✓ Liquidación Diaria Aprobada y Guardada en Historial
               </div>
             ) : (
               <button
                 onClick={handleApproveClosure}
-                className="w-full py-3.5 px-4 rounded-xl font-bold text-sm text-slate-950 bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 shadow-lg shadow-amber-500/25 transition-all flex items-center justify-center gap-2"
+                className="w-full py-3.5 px-4 rounded-xl font-bold text-sm text-slate-950 bg-slate-100 hover:bg-white shadow-md transition-all flex items-center justify-center gap-2"
               >
                 <span>Aprobar y Cerrar Jornada</span>
                 <ArrowRight className="w-4 h-4" />
